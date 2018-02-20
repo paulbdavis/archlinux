@@ -1,0 +1,13 @@
+post_upgrade () {
+    cp /etc/locale.gen /etc/locale.gen.original
+    cp /etc/locale.gen.ds /etc/locale.gen
+    cp /etc/makepkg.conf /etc/makepkg.conf.original
+    cp /etc/makepkg.conf.ds /etc/makepkg.conf
+}
+
+post_install () {
+    systemctl enable --now docker.service
+    systemctl enable --now reflector.timer
+    postupgrade
+}
+

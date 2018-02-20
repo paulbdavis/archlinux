@@ -1,0 +1,177 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-base
+pkgver=0.0.2
+pkgrel=1
+pkgdesc="Base system configuration for dangersalad systems"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+install="dangersalad-base.install"
+makedepends=(git)
+source=(
+    "dangersalad-base.install"
+    "dangersalad.sudoers"
+    "locale.conf"
+    "locale.gen"
+    "makepkg.conf"
+    "reflector.service"
+    "reflector.timer"
+    "vconsole.conf"
+    "user-dirs.dirs"
+    "user-dirs.locale"
+)
+sha256sums=('5c00f01fcaa9bdf77ce58a5a5a72400f2f388165d88dd7633da2a14364cb0fce'
+            'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
+            '033252d5100cbb0028d7c15e075f63e4eb5ff7f1a923cd5cb547bcfd6b024f5b'
+            'd6da7917ea0f2e94aa6cbca5774245826b585fb756671c178c5a0595e958e792'
+            'e45f52b0d2873428124be93f88bc548bcc8033c35a29d1763fae0dcbcc6ebe34'
+            'f79f3d1bf29c6a36452f952178347b8550aa0d48885c1e2e1509d359c568975a'
+            '6448d6f3725783307900a08dceea3dca175a2bdc88b1ff0130990f3b5685287c'
+            '2c09b43e51de87a82ff5eeb1c599ce25800b8d34810f14044bf73644e9f7b742'
+            '23c8b6ebaf3c3369b2f2d6618903e64f2c236f70e12c9a88e80272d2b542c770'
+            '674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b')
+depends=(
+    # base
+    bash
+    bzip2
+    coreutils
+    cryptsetup
+    device-mapper
+    dhcpcd
+    diffutils
+    e2fsprogs
+    file
+    filesystem
+    findutils
+    gawk
+    gcc-libs
+    gettext
+    glibc
+    grep
+    gzip
+    inetutils
+    iproute2
+    iputils
+    jfsutils
+    less
+    licenses
+    linux
+    logrotate
+    lvm2
+    man-db
+    man-pages
+    mdadm
+    nano
+    netctl
+    pacman
+    pciutils
+    pcmciautils
+    perl
+    procps-ng
+    psmisc
+    reiserfsprogs
+    s-nail
+    sed
+    shadow
+    sysfsutils
+    systemd-sysvcompat
+    tar
+    texinfo
+    usbutils
+    util-linux
+    which
+    xfsprogs
+
+    # base-devel
+    autoconf
+    automake
+    binutils
+    bison
+    fakeroot
+    file
+    findutils
+    flex
+    gawk
+    gcc
+    gettext
+    grep
+    groff
+    gzip
+    libtool
+    m4
+    make
+    pacman
+    patch
+    pkg-config
+    sed
+    sudo
+    systemd
+    texinfo
+    util-linux
+    which
+
+    # basic things
+    emacs
+    vim
+    zsh
+
+    # from previous installs
+    arch-install-scripts
+    asp
+    bitcoin-cli
+    cabal-install
+    calc
+    ccid
+    devtools
+    dialog
+    docker
+    docker-compose
+    dosfstools
+    exa
+    figlet
+    fortune-mod
+    git
+    gnupg
+    graphviz
+    htop
+    ncdu
+    nethogs
+    nmap
+    openssh
+    openvpn
+    p7zip
+    pcsclite
+    reflector
+    rsync
+    rtorrent
+    smem
+    syncthing
+    the_silver_searcher
+    tmux
+    trickle
+    unzip
+)
+
+package () {
+    install -Dm 0644 vconsole.conf "$pkgdir/etc/vconsole.conf"
+    install -Dm 0644 locale.conf "$pkgdir/etc/locale.conf"
+    install -Dm 0644 locale.gen "$pkgdir/etc/locale.gen.ds"
+    install -Dm 0644 makepkg.conf "$pkgdir/etc/makepkg.conf.ds"
+    install -Dm 0644 reflector.service "$pkgdir/etc/systemd/system/reflector.service"
+    install -Dm 0644 reflector.timer "$pkgdir/etc/systemd/system/reflector.timer"
+    install -Dm 0640 dangersalad.sudoers "$pkgdir/etc/sudoers.d/dangersalad"
+    git clone https://github.com/paulbdavis/dotcli "$pkgdir/etc/skel/.dotcli"
+    mkdir -p "$pkgdir/root"
+    cp -r "$pkgdir/etc/skel/.dotcli" "$pkgdir/root/.dotcli"
+    for dir in "etc/skel" "root"
+    do
+        (cd "$pkgdir/$dir" && for f in .dotcli/*; do ln -s $f .$(basename $f); done)
+    done
+    
+    git clone --recursive https://github.com/dangersalad/vim "$pkgdir/etc/skel/.vim"
+    
+    install -Dm 0644 user-dirs.dirs "$pkgdir/etc/skel/.config/user-dirs.dirs"
+    install -Dm 0644 user-dirs.locale "$pkgdir/etc/skel/.config/user-dirs.locale"
+    
+    
+}

@@ -1,0 +1,40 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-dell-5520
+pkgver=0.0.1
+pkgrel=3
+provides=('dangersalad-hardware')
+conflicts=('dangersalad-wilddog')
+pkgdesc="Dell Precision 5520 system configuration for dangersalad systems"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+source=(
+    30-touchpad.conf
+)
+sha256sums=(
+    d5dc85061a225f39d0f3823888f0747ee9be92d8e93c842df44884e2d09ad74f
+)
+depends=(
+
+    # base meta package
+    dangersalad-desktop
+
+    efibootmgr
+    intel-ucode
+    iw
+    wpa_actiond
+    wpa_supplicant
+    nvidia
+    nvidia-settings
+    nvidia-utils
+
+    # some apps for this machine
+    reposync
+    steam
+    steam-native-runtime
+    
+)
+
+package () {
+     install -Dm 0644 30-touchpad.conf "$pkgdir/etc/X11/xorg.conf.d/30-touchpad.conf"
+}

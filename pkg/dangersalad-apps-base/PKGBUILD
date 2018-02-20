@@ -1,0 +1,38 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-apps-base
+pkgver=0.0.2
+pkgrel=1
+pkgdesc="Base applications for dangersalad desktops"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+depends=(
+
+    dangersalad-desktop
+    
+    chromium
+    dfhack-twbt-bin
+    electron-cash
+    electrum
+    firefox
+    gimp
+    gitg
+    google-chrome
+    latex2html
+    ledger-git
+    libreoffice-fresh
+    mplayer
+    mypaint
+    pass
+    pass-otp
+    solaar
+    spotify
+    stone-soup
+    syncthing-gtk
+    telegram-desktop
+    vlc
+    zathura
+    zathura-pdf-mupdf
+    zathura-ps
+
+)

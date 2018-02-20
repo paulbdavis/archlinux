@@ -1,0 +1,34 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-apps-dev
+pkgver=0.0.1
+pkgrel=3
+pkgdesc="Dev applications for dangersalad systems"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+depends=(
+
+    dangersalad-desktop
+    
+    aws-cli
+    clang
+    dbeaver
+    eslint
+    ghc
+    go
+    golang-dep
+    google-cloud-sdk
+    jshon
+    kubectl-bin
+    kubernetes-helm
+    kubetail
+    mattermost-desktop
+    nvm
+    rustup
+    slack-desktop
+    yarn
+    python-pip
+    python2-pip
+    texlive-core
+    
+)

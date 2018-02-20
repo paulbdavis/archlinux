@@ -1,0 +1,75 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-exwm
+pkgver=0.0.3
+pkgrel=1
+provides=('dangersalad-desktop')
+conflicts=('dangersalad-i3' 'dangersalad-plasma' 'dangersalad-gnome')
+pkgdesc="EXWM and personal desktop configuration for dangersalad systems"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+install="dangersalad-exwm.install"
+makedepends=(git)
+source=(
+    dangersalad-exwm.install
+    default.pa
+    gtk.css
+    gtkfilechooser.ini
+    settings.ini
+    Trolltech.conf
+    gpg-agent.conf 
+)
+sha256sums=('5f9f69d42713fb270b0ec9c02d872d858f216ba1fb42bbdc6545c57421f5aaed'
+            '45f31e9d13e87def9317e9e12c57c61f582d0c92a3391551842343eb7224be49'
+            '2bf3ae602a106284deb94f800616599cd1dc9f7c8d7152d1ab22eaec84b42b87'
+            '01fe53d1d3b3c52654b971eabde0fc4c87fd46f56aca8be203ef0e5d99cb208d'
+            'cf787d89e822383d00ea9ddace07a5b2080d4a46c11771fe1d71d7f3c66ac3ab'
+            '30dd8d197eaae04127c03ef82b8491e789b4c67690808b82cd7783c538cee4c7'
+            '89af270caed8c2e758a4fe3e41929aa4be9cc010114615ac77622ab9a2f2145c')
+
+depends=(
+
+    # graphical meta package
+    dangersalad-graphical
+
+    acpi
+    arc-gtk-theme
+    arc-icon-theme
+    blueman
+    bluez
+    bluez-utils
+    lxappearance
+    feh
+    numlockx
+    pavucontrol
+    pulseaudio
+    pulseaudio-bluetooth
+    pulseaudio-ctl
+    slock
+    termite
+    yabar-git
+    xcursor-simpleandsoft
+)
+
+package () {
+    
+    install -Dm 0644 gtkfilechooser.ini "$pkgdir/etc/skel/.config/gtk-2.0/gtkfilechooser.ini"
+    install -Dm 0644 settings.ini "$pkgdir/etc/skel/.config/gtk-3.0/settings.ini"
+    install -Dm 0644 gtk.css "$pkgdir/etc/skel/.config/gtk-3.0/gtk.css"
+
+    install -Dm 0644 gpg-agent.conf "$pkgdir/etc/skel/.gnupg/gpg-agent.conf"
+    
+    install -Dm 0644 default.pa "$pkgdir/etc/pulse/default.pa.ds"
+
+    install -Dm 0644 Trolltech.conf "$pkgdir/etc/skel/.config/Trolltech.conf"
+    # install exwm branch of emacs config
+    git clone --recursive --branch exwm https://github.com/dangersalad/emacs-config "$pkgdir/etc/skel/.emacs.d"
+
+    (cd "$pkgdir/etc/skel" && for f in .emacs.d/exwm/dotfiles/*; do ln -s $f .$(basename $f); done)
+
+    (cd "$pkgdir/etc/skel" && ln -s .emacs.d/exwm/xdg-conf/termite .config/termite)
+
+    mkdir -p "$pkgdir/etc/skel/org/agenda"
+    mkdir -p "$pkgdir/etc/skel/sync"
+    
+}

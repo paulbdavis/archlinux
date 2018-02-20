@@ -1,0 +1,91 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-graphical
+pkgver=0.0.1
+pkgrel=3
+pkgdesc="Graphical environment configuration for dangersalad systems"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+install="dangersalad-graphical.install"
+license=('MIT')
+source=(
+    dangersalad-graphical.install 
+    local.conf
+)
+sha256sums=('009f60397cef265166fe35a6bf8f62333a051eaa0b476ef30d11c3f0cd3ac9b0'
+            'f339d0d4433bd646e8c1e5ce63112e0609f5a8389cbe5617d1843d4c670838eb')
+depends=(
+
+    # base meta package
+    dangersalad-base
+
+    inotify-tools
+    nerd-fonts-complete
+    noto-fonts
+    ttf-dejavu
+    ttf-droid
+    ttf-liberation
+    ttf-roboto
+    ttf-ubuntu-font-family
+    ttf-material-design-icons
+    ttf-nerd-fonts-input
+    xdot
+    xdotool
+    xf86-input-wacom
+    xorg-bdftopcf
+    xorg-iceauth
+    xorg-luit
+    xorg-mkfontdir
+    xorg-mkfontscale
+    xorg-server
+    xorg-sessreg
+    xorg-setxkbmap
+    xorg-smproxy
+    xorg-x11perf
+    xorg-xauth
+    xorg-xbacklight
+    xorg-xcmsdb
+    xorg-xcursorgen
+    xorg-xdpyinfo
+    xorg-xdriinfo
+    xorg-xev
+    xorg-xgamma
+    xorg-xhost
+    xorg-xinit
+    xorg-xinput
+    xorg-xkbcomp
+    xorg-xkbevd
+    xorg-xkbutils
+    xorg-xkill
+    xorg-xlsatoms
+    xorg-xlsclients
+    xorg-xmodmap
+    xorg-xpr
+    xorg-xprop
+    xorg-xrandr
+    xorg-xrdb
+    xorg-xrefresh
+    xorg-xset
+    xorg-xsetroot
+    xorg-xvinfo
+    xorg-xwd
+    xorg-xwininfo
+    xorg-xwud
+    xterm
+    
+)
+
+package () {
+    install -Dm 0644 local.conf "$pkgdir/etc/fonts/local.conf"
+    mkdir -p "$pkgdir/etc/X11"
+    echo 'needs_root_rights = yes' > "$pkgdir/etc/X11/Xwrapper.conf"
+
+    mkdir -p "$pkgdir/etc/skel/desktop"
+    mkdir -p "$pkgdir/etc/skel/downloads"
+    mkdir -p "$pkgdir/etc/skel/tmp"
+    mkdir -p "$pkgdir/etc/skel/public"
+    mkdir -p "$pkgdir/etc/skel/documents"
+    mkdir -p "$pkgdir/etc/skel/music"
+    mkdir -p "$pkgdir/etc/skel/pictures"
+    mkdir -p "$pkgdir/etc/skel/videos"
+
+}

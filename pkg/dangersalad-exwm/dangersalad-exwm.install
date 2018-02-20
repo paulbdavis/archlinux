@@ -1,0 +1,8 @@
+post_upgrade () {
+    cp /etc/pulse/default.pa /etc/pulse/default.pa.original
+    cp /etc/pulse/default.pa.ds /etc/pulse/default.pa
+}
+
+post_install () {
+    systemctl enable --now bluetooth.service
+}
