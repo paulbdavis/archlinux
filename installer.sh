@@ -283,10 +283,13 @@ then
 fi
 echo "${hostname}" > /mnt/etc/hostname
 
-cat >>/mnt/etc/pacman.conf <<EOF
+if ! grep '\[dangersalad\]' /mnt/etc/pacman.conf >/dev/null 2>&1
+then
+    cat >>/mnt/etc/pacman.conf <<EOF
 [dangersalad]
 Server = $REPO_URL
 EOF
+fi
 
 arch-chroot /mnt bootctl install
 
