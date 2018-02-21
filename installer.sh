@@ -79,11 +79,20 @@ pacstrap_pkgs=()
 if [[ "$pkgsel" == "none" ]]
 then
     pacstrap_pkgs=(dangersalad-base)
+    if should_encrypt
+    then
+        pacstrap_pkgs=(dangersalad-base dangersalad-crypt)
+    fi
+
 elif [[ "$pkgsel" == "exwm" ]]
 then
     pacstrap_pkgs=(dangersalad-exwm dangersalad-apps-base)
+    if should_encrypt
+    then
+        pacstrap_pkgs=(dangersalad-crypt dangersalad-exwm dangersalad-apps-base)
+    fi
 fi   
-
+    
 if [[ "$pkgsel" != "none" ]]
 then
     install_dev=0
@@ -299,9 +308,6 @@ EOF
 
 if should_encrypt
 then
-    cp /mnt/etc/mkinitcpio.conf /mnt/etc/mkinitcpio.conf.original 
-    cp /mnt/etc/mkinitcpio.conf.encrypted /mnt/etc/mkinitcpio.conf 
-    arch-chroot /mnt mkinitcpio
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
 linux    /vmlinuz-linux

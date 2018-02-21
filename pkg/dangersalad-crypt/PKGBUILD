@@ -1,0 +1,24 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-crypt
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Encryption configuration for dangersalad systems"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+install="dangersalad-crypt.install"
+makedepends=(git)
+source=(
+    "dangersalad-crypt.install"
+    "mkinitcpio.conf"
+)
+sha256sums=('8e4bf6d065e5bb5d43c4a83af51efeadfbe7df15452e7851ed477cbca0804c6d'
+            '69b263acaf1fd65fd0e88643cd53396676e75a9ad548d4d1cb7e4f51051b5dd7')
+depends=(
+
+    dangersalad-base
+)
+
+package () {
+    install -Dm 0644 mkinitcpio.conf "$pkgdir/etc/mkinitcpio.conf.encrypted"
+}

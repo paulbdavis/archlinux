@@ -1,0 +1,10 @@
+post_upgrade () {
+    cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.original
+    cp /etc/mkinitcpio.conf.encrypted /etc/mkinitcpio.conf
+    mkinitcpio
+}
+
+post_install () {
+    postupgrade
+}
+
