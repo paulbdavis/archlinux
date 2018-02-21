@@ -21,7 +21,7 @@ source=(
     "user-dirs.dirs"
     "user-dirs.locale"
 )
-sha256sums=('0640973d0d072bb46ab24b41678244e7262b404a0839bcb3e7f19fec09e6ae7a'
+sha256sums=('5c00f01fcaa9bdf77ce58a5a5a72400f2f388165d88dd7633da2a14364cb0fce'
             'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
             '033252d5100cbb0028d7c15e075f63e4eb5ff7f1a923cd5cb547bcfd6b024f5b'
             'd6da7917ea0f2e94aa6cbca5774245826b585fb756671c178c5a0595e958e792'
