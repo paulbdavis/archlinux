@@ -207,7 +207,7 @@ then
     crypttab=/mnt/etc/crypttab
 
     echo "/dev/mapper/root        /       ext4            defaults        0       1" > "$fstab"
-    echo "${part_boot}            /boot   ext4            defaults        0       2" >> "$fstab"
+    echo "${part_boot}            /boot   vfat            re,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro        0       2" >> "$fstab"
     echo "/dev/mapper/tmp         /tmp    tmpfs           defaults        0       0" >> "$fstab"
     echo "/dev/mapper/swap        none    swap            sw              0       0" >> "$fstab"
 
