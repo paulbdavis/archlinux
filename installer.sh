@@ -182,8 +182,6 @@ fi
 clear
 echo "Starting install"
 
-exit
-
 vg_name="vg0"
 
 ### Set up logging ###
