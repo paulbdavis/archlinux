@@ -139,14 +139,14 @@ source "$install_details_file"
 : ${user:?"user cannot be empty"}
 : ${password:?"password cannot be empty"}
 : ${device:?"device cannot be empty"}
-: ${lv_sizes[*]:?"lv_sizes cannot be empty"}
-: ${lv_mounts[*]:?"lv_mounts cannot be empty"}
 : ${do_encrypt:?"do_encrypt cannot be empty"}
 if should_encrypt
 then
     : ${luks_password:?"luks_password cannot be empty"}
 fi
-: ${pacstrap_pkgs[*]:?"lv_mounts cannot be empty"}
+[[ ${#lv_sizes[@]} -ne 0 ]] || (echo "lv_sizes cannot be empty" && exit 1)
+[[ ${#lv_mounts[@]} -ne 0 ]] || (echo "lv_mounts cannot be empty" && exit 1)
+[[ ${#pacstrap_pkgs[@]} -ne 0 ]] || (echo "pacstrap_pkgs cannot be empty" && exit 1)
 
 setup_message_format="%20s: %s\n"
 function setup_message () {
