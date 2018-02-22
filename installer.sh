@@ -130,10 +130,10 @@ function get_details () {
 if [[ -f "$install_details_file" ]]
 then
     echo "Continuing installation"
+    source "$install_details_file"
 else
     get_details
 fi
-source "$install_details_file"
 
 # check that we have all the details
 : ${hostname:?"hostname cannot be empty"}
