@@ -278,7 +278,7 @@ then
             if [[ "$k" != "root" ]]
             then
                 dd if=/dev/random of="/mnt$luks_key_dir/$k" bs=1 count=256 status=progress
-                cryptsetup -q luksFormat --type luks2 -v -s 512 "/dev/${vg_name}/$k" "$luks_key_dir/$k"
+                cryptsetup -q luksFormat --type luks2 -v -s 512 "/dev/${vg_name}/$k" "/mnt$luks_key_dir/$k"
                 cryptsetup -d "/mnt$luks_key_dir/$k" open "/dev/${vg_name}/$k" "$k"
                 mkfs.ext4 "/dev/mapper/$k"
                 mkdir -p "/mnt${lv_mounts[$k]}"
