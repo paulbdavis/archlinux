@@ -346,6 +346,7 @@ then
     fi
     echo "${hostname}" > /mnt/etc/hostname
     # timezone, change this if I move :P
+    rm /mnt/etc/localtime
     ln -s /usr/share/zoneinfo/America/Denver /mnt/etc/localtime
 
     if ! grep '\[dangersalad\]' /mnt/etc/pacman.conf >/dev/null 2>&1
