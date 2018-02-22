@@ -35,7 +35,7 @@ sync: $(SIGS)
 	$(call printdeps,$@,$^,$?)
 	mkdir $(REPO_DIR) $(REMOTE_REPO_DIR)
 	s3fs dangersalad-archlinux:/repo/x86_64 $(REMOTE_REPO_DIR) -o "nosuid,nodev,default_acl=public-read,url=https://nyc3.digitaloceanspaces.com,nomultipart"
-	sleep 30
+	sleep 5
 	cp $(REMOTE_DB_FILE) $(DB_FILE)
 	cp $(REMOTE_FILES_FILE) $(FILES_FILE)
 	cp $(patsubst %.sig,%,$?) $? $(REPO_DIR)
