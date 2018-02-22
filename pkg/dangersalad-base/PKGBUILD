@@ -176,7 +176,8 @@ package () {
     install -Dm 0644 user-dirs.dirs "$pkgdir/etc/skel/.config/user-dirs.dirs"
     install -Dm 0644 user-dirs.locale "$pkgdir/etc/skel/.config/user-dirs.locale"
 
-    ln -s "$pkgdir/usr/bin/vi" "/usr/bin/vim"
+    mkdir -p "$pkgdir/usr/bin"
+    ln -s "/usr/bin/vim" "$pkgdir/usr/bin/vi" 
     
     install -Dm 0644 99-locale.hook "$pkgdir/usr/share/libalpm/hooks/99-locale.hook"
     
