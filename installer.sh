@@ -223,20 +223,20 @@ then
     echo "swap	/dev/${vg_name}/swap	/dev/urandom	swap,cipher=aes-xts-plain64,size=256" > "$crypttab"
     echo "tmp	/dev/${vg_name}/tmp		/dev/urandom	tmp,cipher=aes-xts-plain64,size=256" >> "$crypttab"
 
-    luks_key_dir=/mnt/etc/luks-keys
-    mkdir -m 700 "$luks_key_dir"
+    luks_key_dir=/etc/luks-keys
+    mkdir -m 700 "/mnt$luks_key_dir"
     for k in "${!lv_mounts[@]}"
     do
         if [[ "$k" != "root" ]]
         then
-            dd if=/dev/random of="$luks_key_dir/$k" bs=1 count=256 status=progress
+            dd if=/dev/random of="/mnt$luks_key_dir/$k" bs=1 count=256 status=progress
             cryptsetup -q luksFormat --type luks2 -v -s 512 "/dev/${vg_name}/$k" "$luks_key_dir/$k"
-            cryptsetup -d "$luks_key_dir/$k" open "/dev/${vg_name}/$k" "$k"
+            cryptsetup -d "/mnt$luks_key_dir/$k" open "/dev/${vg_name}/$k" "$k"
             mkfs.ext4 "/dev/mapper/$k"
             mkdir -p "/mnt${lv_mounts[$k]}"
             mount "/dev/mapper/$k" "/mnt${lv_mounts[$k]}"
             echo "$k	/dev/${vg_name}/$k   ${luks_key_dir}/$k" >> "$crypttab"
-            echo "/dev/mapper/$k        /mnt${lv_mounts[$k]}   ext4        defaults        0       2" >> "$fstab"
+            echo "/dev/mapper/$k        ${lv_mounts[$k]}   ext4        defaults        0       2" >> "$fstab"
         fi
     done
 else
