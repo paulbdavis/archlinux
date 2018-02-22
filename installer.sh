@@ -3,6 +3,9 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
+rm -f /etc/localtime
+ln -s /usr/share/zoneinfo/America/Denver /etc/localtime
+
 REPO_URL="https://nyc3.digitaloceanspaces.com/dangersalad-archlinux/repo/x86_64"
 
 gpg_key_id="21A8557B914A7EA06E99B6AF05041AFE9A54C5FB"
@@ -346,7 +349,7 @@ then
     fi
     echo "${hostname}" > /mnt/etc/hostname
     # timezone, change this if I move :P
-    rm /mnt/etc/localtime
+    rm -f /mnt/etc/localtime
     ln -s /usr/share/zoneinfo/America/Denver /mnt/etc/localtime
 
     if ! grep '\[dangersalad\]' /mnt/etc/pacman.conf >/dev/null 2>&1
