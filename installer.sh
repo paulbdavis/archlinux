@@ -190,6 +190,12 @@ exec 2> >(tee "stderr.log")
 
 timedatectl set-ntp true
 
+dsinstall_step_0_partition=${dsinstall_step_0_partition:-}
+dsinstall_step_1_pacman=${dsinstall_step_1_pacman:-}
+dsinstall_step_2_install_setup=${dsinstall_step_2_install_setup:-}
+dsinstall_step_3_bootloader=${dsinstall_step_3_bootloader:-}
+dsinstall_step_4_users=${dsinstall_step_4_users:-}
+
 if [[ -z "$dsinstall_step_0_partition" ]]
 then
     # make sure all crypt partitions are closed
