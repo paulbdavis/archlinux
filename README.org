@@ -1,0 +1,7 @@
+#+TITLE: Danger Salad Linux (Arch)
+
+* Install
+
+  #+BEGIN_SRC sh
+    curl -sL https://git.io/vAze9 | bash
+  #+END_SRC
