@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.0.5
+pkgver=0.0.6
 pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')
@@ -174,6 +174,8 @@ package () {
     
     install -Dm 0644 user-dirs.dirs "$pkgdir/etc/skel/.config/user-dirs.dirs"
     install -Dm 0644 user-dirs.locale "$pkgdir/etc/skel/.config/user-dirs.locale"
+
+    ln -s "$pkgdir/usr/bin/vi" "/usr/bin/vim"
     
     install -Dm 0644 99-locale.hook "$pkgdir/usr/share/libalpm/hooks/99-locale.hook"
     
