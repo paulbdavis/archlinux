@@ -340,6 +340,8 @@ then
         genfstab -t PARTUUID /mnt >> "$fstab"
     fi
     echo "${hostname}" > /mnt/etc/hostname
+    # timezone, change this if I move :P
+    ln -s /usr/share/zoneinfo/America/Denver /mnt/etc/localtime
 
     if ! grep '\[dangersalad\]' /mnt/etc/pacman.conf >/dev/null 2>&1
     then
