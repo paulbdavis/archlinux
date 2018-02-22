@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-graphical
-pkgver=0.0.1
-pkgrel=3
+pkgver=0.0.2
+pkgrel=1
 pkgdesc="Graphical environment configuration for dangersalad systems"
 arch=('any')
 url="https://github.com/dangersalad/arch/tree/master/pkg"
@@ -10,9 +10,15 @@ license=('MIT')
 source=(
     dangersalad-graphical.install 
     local.conf
+    firefox-personal.desktop
+    firefox-dev.desktop
+    electrum-testnet.desktop
 )
 sha256sums=('009f60397cef265166fe35a6bf8f62333a051eaa0b476ef30d11c3f0cd3ac9b0'
-            'f339d0d4433bd646e8c1e5ce63112e0609f5a8389cbe5617d1843d4c670838eb')
+            'f339d0d4433bd646e8c1e5ce63112e0609f5a8389cbe5617d1843d4c670838eb'
+            '514d043a91b177f9570ffcfa8f45943ba37b1efe4cc6cbd689e8dfadb22ff634'
+            '0123b63405658c2f0db30a1ac6ee53212a2a987ce61bd2760b83f80beda4a6f3'
+            '003b67aacac685e56446111f22819bbdab4007177ac437bf80010df74612432c')
 depends=(
 
     # base meta package
@@ -79,6 +85,10 @@ package () {
     mkdir -p "$pkgdir/etc/X11"
     echo 'needs_root_rights = yes' > "$pkgdir/etc/X11/Xwrapper.conf"
 
+    install -Dm 0644 firefox-personal.desktop "$pkgdir/etc/skel/.local/share/applications/firefox-personal.desktop"
+    install -Dm 0644 firefox-dev.desktop "$pkgdir/etc/skel/.local/share/applications/firefox-dev.desktop"
+    install -Dm 0644 electrum-testnet.desktop "$pkgdir/etc/skel/.local/share/applications/electrum-testnet.desktop"
+    
     mkdir -p "$pkgdir/etc/skel/desktop"
     mkdir -p "$pkgdir/etc/skel/downloads"
     mkdir -p "$pkgdir/etc/skel/tmp"
