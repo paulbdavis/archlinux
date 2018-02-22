@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-crypt
-pkgver=0.0.1
-pkgrel=2
+pkgver=0.0.2
+pkgrel=1
 pkgdesc="Encryption configuration for dangersalad systems"
 arch=('any')
 url="https://github.com/dangersalad/arch/tree/master/pkg"
@@ -11,9 +11,11 @@ makedepends=(git)
 source=(
     "dangersalad-crypt.install"
     "mkinitcpio.conf"
+    "99-crypt.hook"
 )
-sha256sums=('c33df4910010639d5453574d77cdb1825021c1503af4e62538f74c4b9405531e'
-            '69b263acaf1fd65fd0e88643cd53396676e75a9ad548d4d1cb7e4f51051b5dd7')
+sha256sums=('18da7c7584a532a4e12ba959e172f52ff9e0f398d2ebc00735ee5b54e26dd23a'
+            '69b263acaf1fd65fd0e88643cd53396676e75a9ad548d4d1cb7e4f51051b5dd7'
+            '553f27c52a4512603f44cd01e9a7d75631295522074609443a48914f2eb3381b')
 depends=(
 
     dangersalad-base
@@ -21,4 +23,5 @@ depends=(
 
 package () {
     install -Dm 0644 mkinitcpio.conf "$pkgdir/etc/mkinitcpio.conf.encrypted"
+    install -Dm 0644 99-crypt.hook "$pkgdir/usr/share/libalpm/hooks/99-crypt.hook"
 }
