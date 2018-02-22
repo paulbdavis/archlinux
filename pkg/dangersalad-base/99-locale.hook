@@ -1,0 +1,11 @@
+[Trigger]
+Type = File
+Operation = Install
+Operation = Upgrade
+Target = etc/locale.gen
+Target = etc/locale.gen.ds
+
+[Action]
+Description = Updating locales...
+When = PostTransaction
+Exec = /usr/bin/locale-gen

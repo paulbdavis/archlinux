@@ -19,6 +19,7 @@ source=(
     "vconsole.conf"
     "user-dirs.dirs"
     "user-dirs.locale"
+    "99-locale.hook"
 )
 sha256sums=('c31f5e767a90ceb187266fb88f6571df8b99664db9bd947d077c594cfd2f2d86'
             'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
@@ -29,7 +30,8 @@ sha256sums=('c31f5e767a90ceb187266fb88f6571df8b99664db9bd947d077c594cfd2f2d86'
             '6448d6f3725783307900a08dceea3dca175a2bdc88b1ff0130990f3b5685287c'
             '2c09b43e51de87a82ff5eeb1c599ce25800b8d34810f14044bf73644e9f7b742'
             '23c8b6ebaf3c3369b2f2d6618903e64f2c236f70e12c9a88e80272d2b542c770'
-            '674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b')
+            '674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b'
+            'b78e49d9bc118585f8bf0aef224d4339a122a7ca7035939bcc944a6564244cac')
 depends=(
     # base
     bash
@@ -173,5 +175,6 @@ package () {
     install -Dm 0644 user-dirs.dirs "$pkgdir/etc/skel/.config/user-dirs.dirs"
     install -Dm 0644 user-dirs.locale "$pkgdir/etc/skel/.config/user-dirs.locale"
     
+    install -Dm 0644 99-locale.hook "$pkgdir/usr/share/libalpm/hooks/99-locale.hook"
     
 }
