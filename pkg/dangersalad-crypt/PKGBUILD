@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-crypt
 pkgver=0.0.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Encryption configuration for dangersalad systems"
 arch=('any')
 url="https://github.com/dangersalad/arch/tree/master/pkg"
