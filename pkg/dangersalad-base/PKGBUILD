@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.0.6
+pkgver=0.0.8
 pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')
@@ -14,6 +14,7 @@ source=(
     "locale.conf"
     "locale.gen"
     "makepkg.conf"
+    "pacman.conf"
     "reflector.service"
     "reflector.timer"
     "vconsole.conf"
@@ -21,11 +22,12 @@ source=(
     "user-dirs.locale"
     "99-locale.hook"
 )
-sha256sums=('2eadb0516b1317795872a001b47844590bf744b51727c80472e0dbecab24b45e'
+sha256sums=('613800fd6517164e2432d0e7bffa4e133a2ca95dfa270b90831b4b183954bcf3'
             'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
             '033252d5100cbb0028d7c15e075f63e4eb5ff7f1a923cd5cb547bcfd6b024f5b'
             'd6da7917ea0f2e94aa6cbca5774245826b585fb756671c178c5a0595e958e792'
             'e45f52b0d2873428124be93f88bc548bcc8033c35a29d1763fae0dcbcc6ebe34'
+            '89c2787812d0abf01d1309475cb5ba04b41e444de398cc7d782609c350f8496d'
             'f79f3d1bf29c6a36452f952178347b8550aa0d48885c1e2e1509d359c568975a'
             '6448d6f3725783307900a08dceea3dca175a2bdc88b1ff0130990f3b5685287c'
             '2c09b43e51de87a82ff5eeb1c599ce25800b8d34810f14044bf73644e9f7b742'
@@ -160,11 +162,14 @@ package () {
     install -Dm 0644 locale.conf "$pkgdir/etc/locale.conf"
     install -Dm 0644 locale.gen "$pkgdir/etc/locale.gen.ds"
     install -Dm 0644 makepkg.conf "$pkgdir/etc/makepkg.conf.ds"
+    install -Dm 0644 pacman.conf "$pkgdir/etc/pacman.conf.ds"
     install -Dm 0644 reflector.service "$pkgdir/etc/systemd/system/reflector.service"
     install -Dm 0644 reflector.timer "$pkgdir/etc/systemd/system/reflector.timer"
     install -Dm 0640 dangersalad.sudoers "$pkgdir/etc/sudoers.d/dangersalad"
+    chmod 0750  "$pkgdir/etc/sudoers.d"
     git clone https://github.com/paulbdavis/dotcli "$pkgdir/etc/skel/.dotcli"
     mkdir -p "$pkgdir/root"
+    chmod 0750  "$pkgdir/root"
     cp -r "$pkgdir/etc/skel/.dotcli" "$pkgdir/root/.dotcli"
     for dir in "etc/skel" "root"
     do

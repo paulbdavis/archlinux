@@ -5,6 +5,9 @@ post_upgrade () {
     
     cp /etc/makepkg.conf /etc/makepkg.conf.original
     cp /etc/makepkg.conf.ds /etc/makepkg.conf
+    
+    cp /etc/pacman.conf /etc/pacman.conf.original
+    cp /etc/pacman.conf.ds /etc/pacman.conf
 }
 
 post_install () {
