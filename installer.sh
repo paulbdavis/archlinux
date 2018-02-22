@@ -10,6 +10,8 @@ gpg_trusted="/usr/share/pacman/keyrings/archlinux-trusted"
 
 install_details_file="$HOME/.dsinstall"
 
+declare -A lv_sizes=()
+declare -A lv_mounts=()
 declare -A lv_defaults=()
 
 lv_defaults[root]=32
@@ -27,12 +29,12 @@ function get_details () {
     hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
     clear
     : ${hostname:?"hostname cannot be empty"}
-    echo "hostname=$hostname" > "$install_details_file"
+    printf "hostname=%q\n" "$hostname" > "$install_details_file"
 
     user=$(dialog --stdout --inputbox "Enter admin username (default paul)" 0 0) || exit 1
     clear
     user=${user:="paul"}
-    echo "user=\"$user\"" >> "$install_details_file"
+    printf "user=%q\n" "$user" >> "$install_details_file"
 
     password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
     clear
@@ -40,18 +42,15 @@ function get_details () {
     password2=$(dialog --stdout --passwordbox "Enter admin password again" 0 0) || exit 1
     clear
     [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
-    echo "password=\"$password\"" >> "$install_details_file"
+    printf "password=%q\n" "$password" >> "$install_details_file"
 
     devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
     device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
     clear
-    echo "device=\"$device\"" >> "$install_details_file"
+    printf "device=%s\n" "$device" >> "$install_details_file"
 
     part_list=(/root $(dialog --stdout --nocancel --checklist "Extra partitions" 0 0 4 "/home" "Home" on "/var" "" 0 "/var/lib/docker" "Docker" 0 "/opt" "" 0))
     clear
-
-    declare -A lv_sizes=()
-    declare -A lv_mounts=()
 
     for part in ${part_list[@]}
     do
@@ -60,14 +59,14 @@ function get_details () {
         lv_sizes["$key"]=$(dialog --stdout --inputbox "Initial ${part} size in GiB (Default ${lv_defaults[$key]} GiB)" 0 0) || exit 1
         clear
         lv_sizes["$key"]=${lv_sizes[$key]:-${lv_defaults[$key]}}
+        printf "lv_sizes[%s]=%s\n" "$key" "${lv_sizes["$key"]}" >> "$install_details_file"
+        printf "lv_mounts[%s]=%s\n" "$key" "${lv_mounts["$key"]}" >> "$install_details_file"
     done
-    echo "lv_sizes=\"(${lv_sizes[@]})\"" >> "$install_details_file"
-    echo "lv_mounts=\"(${lv_mounts[@]})\"" >> "$install_details_file"
 
     do_encrypt=0
     dialog --yesno "Encrypt system?" 0 0 && do_encrypt=1
     clear
-    echo "do_encrypt=\"$do_encrypt\"" >> "$install_details_file"
+    printf "do_encrypt=%s\n" "$do_encrypt" >> "$install_details_file"
 
     luks_password=
 
@@ -80,7 +79,7 @@ function get_details () {
         clear
         [[ "$luks_password" == "$luks_password2" ]] || ( echo "LUKS passwords did not match"; exit 1; )
     fi
-    echo "luks_password=\"$luks_password\"" >> "$install_details_file"
+    printf "luks_password=%q\n" "$luks_password" >> "$install_details_file"
 
     pkgsel="$(dialog --stdout --no-tags --menu "Package Selection" 0 0 2 "exwm" "EXWM" "none" "No GUI")"
     clear
@@ -123,7 +122,7 @@ function get_details () {
         pacstrap_pkgs=(${pacstrap_pkgs[@]} dangersalad-dell-5520)
     fi
     
-    echo "pacstrap_pkgs=\"(${pacstrap_pkgs[@]})\"" >> "$install_details_file"
+    printf "pacstrap_pkgs=%s\n" "(${pacstrap_pkgs[*]})" >> "$install_details_file"
 }
 
 
@@ -182,6 +181,8 @@ fi
 
 clear
 echo "Starting install"
+
+exit
 
 vg_name="vg0"
 
