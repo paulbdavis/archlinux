@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-apps-base
-pkgver=0.0.2
+pkgver=0.0.3
 pkgrel=1
 pkgdesc="Base applications for dangersalad desktops"
 arch=('any')
@@ -25,6 +25,7 @@ depends=(
     mypaint
     pass
     pass-otp
+    poppler-glib
     solaar
     spotify
     stone-soup
