@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.0.4
-pkgrel=3
+pkgver=0.0.5
+pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')
 url="https://github.com/dangersalad/arch/tree/master/pkg"
@@ -21,7 +21,7 @@ source=(
     "user-dirs.locale"
     "99-locale.hook"
 )
-sha256sums=('c31f5e767a90ceb187266fb88f6571df8b99664db9bd947d077c594cfd2f2d86'
+sha256sums=('69f8743b68f112a75e32859a2a337e6551101396526ffc80b72f9c1454ad0f8d'
             'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
             '033252d5100cbb0028d7c15e075f63e4eb5ff7f1a923cd5cb547bcfd6b024f5b'
             'd6da7917ea0f2e94aa6cbca5774245826b585fb756671c178c5a0595e958e792'
