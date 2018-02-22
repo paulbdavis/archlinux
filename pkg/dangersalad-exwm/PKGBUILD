@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-exwm
 pkgver=0.0.3
-pkgrel=1
+pkgrel=2
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-plasma' 'dangersalad-gnome')
 pkgdesc="EXWM and personal desktop configuration for dangersalad systems"
@@ -19,7 +19,7 @@ source=(
     Trolltech.conf
     gpg-agent.conf 
 )
-sha256sums=('5f9f69d42713fb270b0ec9c02d872d858f216ba1fb42bbdc6545c57421f5aaed'
+sha256sums=('51fa690c71f4ec830b2af3ea1700ae95a916a63012a8bea9091b5eb3d1c283eb'
             '45f31e9d13e87def9317e9e12c57c61f582d0c92a3391551842343eb7224be49'
             '2bf3ae602a106284deb94f800616599cd1dc9f7c8d7152d1ab22eaec84b42b87'
             '01fe53d1d3b3c52654b971eabde0fc4c87fd46f56aca8be203ef0e5d99cb208d'

@@ -5,4 +5,5 @@ post_upgrade () {
 
 post_install () {
     systemctl enable --now bluetooth.service
+    post_upgrade
 }
