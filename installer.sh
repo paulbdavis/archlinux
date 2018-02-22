@@ -32,7 +32,7 @@ function get_details () {
     user=$(dialog --stdout --inputbox "Enter admin username (default paul)" 0 0) || exit 1
     clear
     user=${user:="paul"}
-    echo "user=$user" >> "$install_details_file"
+    echo "user=\"$user\"" >> "$install_details_file"
 
     password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
     clear
@@ -40,12 +40,12 @@ function get_details () {
     password2=$(dialog --stdout --passwordbox "Enter admin password again" 0 0) || exit 1
     clear
     [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
-    echo "password=$password" >> "$install_details_file"
+    echo "password=\"$password\"" >> "$install_details_file"
 
     devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
     device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
     clear
-    echo "device=$device" >> "$install_details_file"
+    echo "device=\"$device\"" >> "$install_details_file"
 
     part_list=(/root $(dialog --stdout --nocancel --checklist "Extra partitions" 0 0 4 "/home" "Home" on "/var" "" 0 "/var/lib/docker" "Docker" 0 "/opt" "" 0))
     clear
@@ -61,13 +61,13 @@ function get_details () {
         clear
         lv_sizes["$key"]=${lv_sizes[$key]:-${lv_defaults[$key]}}
     done
-    echo "lv_sizes=(${lv_sizes[@]})" >> "$install_details_file"
-    echo "lv_mounts=(${lv_mounts[@]})" >> "$install_details_file"
+    echo "lv_sizes=\"(${lv_sizes[@]})\"" >> "$install_details_file"
+    echo "lv_mounts=\"(${lv_mounts[@]})\"" >> "$install_details_file"
 
     do_encrypt=0
     dialog --yesno "Encrypt system?" 0 0 && do_encrypt=1
     clear
-    echo "do_encrypt=$do_encrypt" >> "$install_details_file"
+    echo "do_encrypt=\"$do_encrypt\"" >> "$install_details_file"
 
     luks_password=
 
@@ -80,7 +80,7 @@ function get_details () {
         clear
         [[ "$luks_password" == "$luks_password2" ]] || ( echo "LUKS passwords did not match"; exit 1; )
     fi
-    echo "luks_password=$luks_password" >> "$install_details_file"
+    echo "luks_password=\"$luks_password\"" >> "$install_details_file"
 
     pkgsel="$(dialog --stdout --no-tags --menu "Package Selection" 0 0 2 "exwm" "EXWM" "none" "No GUI")"
     clear
@@ -123,17 +123,17 @@ function get_details () {
         pacstrap_pkgs=(${pacstrap_pkgs[@]} dangersalad-dell-5520)
     fi
     
-    echo "pacstrap_pkgs=(${pacstrap_pkgs[@]})" >> "$install_details_file"
+    echo "pacstrap_pkgs=\"(${pacstrap_pkgs[@]})\"" >> "$install_details_file"
 }
 
 
 if [[ -f "$install_details_file" ]]
 then
     echo "Continuing installation"
-    source "$install_details_file"
 else
     get_details
 fi
+source "$install_details_file"
 
 # check that we have all the details
 : ${hostname:?"hostname cannot be empty"}
