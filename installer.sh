@@ -92,7 +92,7 @@ then
         pacstrap_pkgs=(dangersalad-crypt dangersalad-exwm dangersalad-apps-base)
     fi
 fi   
-    
+
 if [[ "$pkgsel" != "none" ]]
 then
     install_dev=0
@@ -308,21 +308,40 @@ EOF
 
 if should_encrypt
 then
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
+    if [[ "$hardware_pkg" == "dell-5520" ]]
+    then
+        cat <<EOF > /mnt/boot/loader/entries/arch.conf
+title    Danger Salad Linux (Arch)
+linux    /vmlinuz-linux
+initrd   /initramfs-linux.img
+options  cryptdevice=/dev/${vg_name}/root:root root=/dev/mapper/root nvidia_drm.modeset=1 rw
+EOF
+    else
+        cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
 options  cryptdevice=/dev/${vg_name}/root:root root=/dev/mapper/root rw
 EOF
-
+    fi
     
 else
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
+    if [[ "$hardware_pkg" == "dell-5520" ]]
+    then
+        cat <<EOF > /mnt/boot/loader/entries/arch.conf
+title    Danger Salad Linux (Arch)
+linux    /vmlinuz-linux
+initrd   /initramfs-linux.img
+options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") nvidia_drm.modeset=1 rw
+EOF
+    else
+        cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 EOF
+    fi
 fi
 
 echo -n "Getting GPG public key for installation"
