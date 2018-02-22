@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-crypt
-pkgver=0.0.2
+pkgver=0.0.3
 pkgrel=1
 pkgdesc="Encryption configuration for dangersalad systems"
 arch=('any')
@@ -15,7 +15,7 @@ source=(
 )
 sha256sums=('18da7c7584a532a4e12ba959e172f52ff9e0f398d2ebc00735ee5b54e26dd23a'
             '69b263acaf1fd65fd0e88643cd53396676e75a9ad548d4d1cb7e4f51051b5dd7'
-            '553f27c52a4512603f44cd01e9a7d75631295522074609443a48914f2eb3381b')
+            '5a48f01b9bcecb1fce8ca211549c55f644310777d527b0a0f6a77674de99aaa4')
 depends=(
 
     dangersalad-base

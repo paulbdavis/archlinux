@@ -8,5 +8,6 @@ Target = usr/lib/initcpio/*
 
 [Action]
 Description = Updating initcpios...
+Depends=mkinitcpio
 When = PostTransaction
-Exec = /usr/bin/mkinitcpio
+Exec=/usr/bin/mkinitcpio -P
