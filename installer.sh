@@ -119,6 +119,7 @@ function get_details () {
 
     hardware_pkg="$(dialog --stdout --no-tags --menu "Harware package" 0 0 2 "none" "None" "dell-5520" "Dell 5520")"
     clear
+    printf "hardware_pkg=%s\n" "${hardware_pkg}" >> "$install_details_file"
 
     if [[ "$hardware_pkg" == "dell-5520" ]]
     then
@@ -145,6 +146,7 @@ source "$install_details_file"
 : ${lv_sizes[*]:?"lv_sizes cannot be empty"}
 : ${lv_mounts[*]:?"lv_mounts cannot be empty"}
 : ${do_encrypt:?"do_encrypt cannot be empty"}
+: ${hardware_pkg:?"hardware_pkg cannot be empty"}
 if should_encrypt
 then
     : ${luks_password:?"luks_password cannot be empty"}
