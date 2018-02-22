@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-exwm
-pkgver=0.0.3
-pkgrel=2
+pkgver=0.0.4
+pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-plasma' 'dangersalad-gnome')
 pkgdesc="EXWM and personal desktop configuration for dangersalad systems"
@@ -58,6 +58,7 @@ package () {
     install -Dm 0644 gtk.css "$pkgdir/etc/skel/.config/gtk-3.0/gtk.css"
 
     install -Dm 0644 gpg-agent.conf "$pkgdir/etc/skel/.gnupg/gpg-agent.conf"
+    chmod 700 "$pkgdir/etc/skel/.gnupg"
     
     install -Dm 0644 default.pa "$pkgdir/etc/pulse/default.pa.ds"
 
@@ -67,7 +68,7 @@ package () {
 
     (cd "$pkgdir/etc/skel" && for f in .emacs.d/exwm/dotfiles/*; do ln -s $f .$(basename $f); done)
 
-    (cd "$pkgdir/etc/skel" && ln -s .emacs.d/exwm/xdg-conf/termite .config/termite)
+    (cd "$pkgdir/etc/skel/.config" && ln -s ../.emacs.d/exwm/xdg-conf/termite termite)
 
     mkdir -p "$pkgdir/etc/skel/org/agenda"
     mkdir -p "$pkgdir/etc/skel/sync"
