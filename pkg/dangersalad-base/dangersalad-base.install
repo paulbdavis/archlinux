@@ -11,6 +11,7 @@ post_install () {
     systemctl enable --now docker.service
     systemctl enable --now reflector.timer
     systemctl enable --now dhcpd.service
+    systemctl enable --now pcscd.service
     post_upgrade
 }
 
