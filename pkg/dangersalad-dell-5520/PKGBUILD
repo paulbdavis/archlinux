@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-dell-5520
 pkgver=0.0.2
-pkgrel=1
+pkgrel=2
 provides=('dangersalad-hardware')
 conflicts=('dangersalad-wilddog')
 pkgdesc="Dell Precision 5520 system configuration for dangersalad systems"
@@ -41,7 +41,7 @@ depends=(
 
 package () {
      install -Dm 0644 30-touchpad.conf "$pkgdir/etc/X11/xorg.conf.d/30-touchpad.conf"
-     install -Dm 0644 nvidia.conf "$pkgdir/etc/X11/xorg.conf.d/00-nvidia.conf.conf"
+     install -Dm 0644 nvidia.conf "$pkgdir/etc/X11/xorg.conf.d/00-nvidia.conf"
      install -Dm 0644 nvidia.hook "$pkgdir/usr/share/libalpm/hooks/nvidia.hook"
      install -Dm 0644 xinitrc.local "$pkgdir/etc/skel/.xinitrc.local"
 }
