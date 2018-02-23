@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-dell-5520
-pkgver=0.0.2
-pkgrel=3
+pkgver=0.0.3
+pkgrel=1
 provides=('dangersalad-hardware')
 conflicts=('dangersalad-wilddog')
 pkgdesc="Dell Precision 5520 system configuration for dangersalad systems"
@@ -31,6 +31,7 @@ depends=(
     nvidia
     nvidia-settings
     nvidia-utils
+    lib32-nvidia-utils
 
     # some apps for this machine
     reposync
