@@ -1,0 +1,10 @@
+[Unit]
+Description=Copy EFISTUB Kernel to EFI System Partition
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cp -af /boot/vmlinuz-linux /boot/efi/arch/
+ExecStart=/usr/bin/cp -af /boot/initramfs-linux.img /boot/efi/arch/
+ExecStart=/usr/bin/cp -af /boot/initramfs-linux-fallback.img /boot/efi/arch/
+ExecStart=/usr/bin/cp -af /boot/intel-ucode.img /boot/efi/arch/
+

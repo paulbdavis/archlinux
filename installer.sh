@@ -269,7 +269,7 @@ then
         crypttab=/mnt/etc/crypttab
 
         echo "/dev/mapper/root        /       ext4            defaults        0       1" > "$fstab"
-        echo "${part_boot}            /boot   vfat            rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro        0       2" >> "$fstab"
+        echo "${part_boot}            /boot/efi   vfat            rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro        0       2" >> "$fstab"
         echo "/dev/mapper/tmp         /tmp    tmpfs           defaults        0       0" >> "$fstab"
         echo "/dev/mapper/swap        none    swap            sw              0       0" >> "$fstab"
 
@@ -309,8 +309,8 @@ then
 
     dd if=/dev/zero of="${part_boot}" bs=1M status=progress || echo -n
     mkfs.vfat -F32 "${part_boot}"
-    mkdir /mnt/boot
-    mount "${part_boot}" /mnt/boot
+    mkdir -p /mnt/boot/efi
+    mount "${part_boot}" /mnt/boot/efi
     echo "dsinstall_step_0_partition=y" >> "$install_details_file"
 fi
 
@@ -381,9 +381,9 @@ fi
 
 if [[ -z "$dsinstall_step_3_bootloader" ]]
 then
-    arch-chroot /mnt bootctl install
+    arch-chroot /mnt bootctl --path=/boot/efi install
 
-    cat <<EOF > /mnt/boot/loader/loader.conf
+    cat <<EOF > /mnt/boot/efi/loader/loader.conf
 default arch
 EOF
 
@@ -391,17 +391,18 @@ EOF
     then
         if [[ "$hardware_pkg" == "dell-5520" ]]
         then
-            cat <<EOF > /mnt/boot/loader/entries/arch.conf
+            cat <<EOF > /mnt/boot/efi/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
+linux    /arch/vmlinuz-linux
+initrd   /arch/intel-ucode.img
+initrd   /arch/initramfs-linux.img
 options  cryptdevice=/dev/${vg_name}/root:root root=/dev/mapper/root nvidia_drm.modeset=1 rw
 EOF
         else
-            cat <<EOF > /mnt/boot/loader/entries/arch.conf
+            cat <<EOF > /mnt/boot/efi/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
+linux    /arch/vmlinuz-linux
+initrd   /arch/initramfs-linux.img
 options  cryptdevice=/dev/${vg_name}/root:root root=/dev/mapper/root rw
 EOF
         fi
@@ -409,22 +410,25 @@ EOF
     else
         if [[ "$hardware_pkg" == "dell-5520" ]]
         then
-            cat <<EOF > /mnt/boot/loader/entries/arch.conf
+            cat <<EOF > /mnt/boot/efi/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
+linux    /arch/vmlinuz-linux
+initrd   /arch/intel-ucode.img
+initrd   /arch/initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") nvidia_drm.modeset=1 rw
 EOF
         else
-            cat <<EOF > /mnt/boot/loader/entries/arch.conf
+            cat <<EOF > /mnt/boot/efi/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
-linux    /vmlinuz-linux
-initrd   /initramfs-linux.img
+linux    /arch/vmlinuz-linux
+initrd   /arch/initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 EOF
         fi
     fi
 
+    arch-chroot /mnt systemctl start efi-update.service
+    
     echo "dsinstall_step_3_bootloader=y" >> "$install_details_file"
 fi
 

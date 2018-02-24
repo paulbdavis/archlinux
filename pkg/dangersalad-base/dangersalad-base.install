@@ -8,6 +8,9 @@ post_upgrade () {
     
     cp /etc/pacman.conf /etc/pacman.conf.original
     cp /etc/pacman.conf.ds /etc/pacman.conf
+    
+    cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.original
+    cp /etc/mkinitcpio.conf.ds /etc/mkinitcpio.conf
 }
 
 post_install () {
@@ -15,6 +18,7 @@ post_install () {
     systemctl enable --now reflector.timer
     systemctl enable --now dhcpcd.service
     systemctl enable --now pcscd.service
+    systemctl enable --now efi-update.path
     post_upgrade
 }
 

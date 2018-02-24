@@ -1,7 +1,7 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.0.8
-pkgrel=2
+pkgver=0.0.9
+pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')
 url="https://github.com/dangersalad/arch/tree/master/pkg"
@@ -14,6 +14,7 @@ source=(
     "locale.conf"
     "locale.gen"
     "makepkg.conf"
+    "mkinitcpio.conf"
     "pacman.conf"
     "reflector.service"
     "reflector.timer"
@@ -21,19 +22,28 @@ source=(
     "user-dirs.dirs"
     "user-dirs.locale"
     "99-locale.hook"
+    "99-initcpio.hook"
+    "systemd-boot.hook"
+    "efi-update.path"
+    "efi-update.service"
 )
-sha256sums=('06ccfde37c2a30181d76a94d5834eb273f25856f1f37283cb2609d085c33de9d'
+sha256sums=('af51a02771f8fdfbb8a7ed8d9c9226b9850109022ae94d3c828a08a7ccf575c2'
             'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
             '033252d5100cbb0028d7c15e075f63e4eb5ff7f1a923cd5cb547bcfd6b024f5b'
             'd6da7917ea0f2e94aa6cbca5774245826b585fb756671c178c5a0595e958e792'
             'e45f52b0d2873428124be93f88bc548bcc8033c35a29d1763fae0dcbcc6ebe34'
+            '9008530946942fa5cadca0c6edaa6a5323fca5e337fbc49f425659db0b93807f'
             '89c2787812d0abf01d1309475cb5ba04b41e444de398cc7d782609c350f8496d'
             'f79f3d1bf29c6a36452f952178347b8550aa0d48885c1e2e1509d359c568975a'
             '6448d6f3725783307900a08dceea3dca175a2bdc88b1ff0130990f3b5685287c'
             '2c09b43e51de87a82ff5eeb1c599ce25800b8d34810f14044bf73644e9f7b742'
             '23c8b6ebaf3c3369b2f2d6618903e64f2c236f70e12c9a88e80272d2b542c770'
             '674ac4b0bd40c5764a1ddf4e0119e9b4ee02f743211eefcf7b27c932a4831a4b'
-            'b78e49d9bc118585f8bf0aef224d4339a122a7ca7035939bcc944a6564244cac')
+            'b78e49d9bc118585f8bf0aef224d4339a122a7ca7035939bcc944a6564244cac'
+            '93203f764c4da0c4ecadf80cded78d5f520f8274f165c6a48b683e35ffe0845a'
+            '40dbff49f7a48c4eb84d8985f4268fbb58d44c750f839ef574175a65e2a46989'
+            '99636f7af28ce79760b2cf93baf4444e5eecbaf8a4d1df1db2a2470ddecb5f3f'
+            'beb6db09bee86059df49e89a36bbe606505c52239fbef81ea5207ba9389c832f')
 depends=(
     # base
     bash
@@ -135,6 +145,7 @@ depends=(
     exa
     figlet
     fortune-mod
+    fwupd
     git
     gnupg
     graphviz
@@ -162,9 +173,12 @@ package () {
     install -Dm 0644 locale.conf "$pkgdir/etc/locale.conf"
     install -Dm 0644 locale.gen "$pkgdir/etc/locale.gen.ds"
     install -Dm 0644 makepkg.conf "$pkgdir/etc/makepkg.conf.ds"
+    install -Dm 0644 mkinitcpio.conf "$pkgdir/etc/mkinitcpio.conf.ds"
     install -Dm 0644 pacman.conf "$pkgdir/etc/pacman.conf.ds"
     install -Dm 0644 reflector.service "$pkgdir/etc/systemd/system/reflector.service"
     install -Dm 0644 reflector.timer "$pkgdir/etc/systemd/system/reflector.timer"
+    install -Dm 0644 efi-update.path "$pkgdir/etc/systemd/system/efi-update.path"
+    install -Dm 0644 efi-update.service "$pkgdir/etc/systemd/system/efi-update.service"
     install -Dm 0640 dangersalad.sudoers "$pkgdir/etc/sudoers.d/dangersalad"
     chmod 0750  "$pkgdir/etc/sudoers.d"
     git clone https://github.com/paulbdavis/dotcli "$pkgdir/etc/skel/.dotcli"
@@ -185,5 +199,7 @@ package () {
     ln -s "/usr/bin/vim" "$pkgdir/usr/bin/vi" 
     
     install -Dm 0644 99-locale.hook "$pkgdir/usr/share/libalpm/hooks/99-locale.hook"
+    install -Dm 0644 99-initcpio.hook "$pkgdir/usr/share/libalpm/hooks/99-initcpio.hook"
+    install -Dm 0644 systemd-boot.hook "$pkgdir/usr/share/libalpm/hooks/systemd-boot.hook"
     
 }

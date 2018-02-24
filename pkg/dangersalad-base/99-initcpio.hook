@@ -2,11 +2,11 @@
 Type = File
 Operation = Install
 Operation = Upgrade
-Target = etc/mkinitcpio.conf.encrypted
+Target = etc/mkinitcpio.conf.d
 Target = usr/lib/initcpio/*
 
 [Action]
-Description = Updating initcpios (crypt)...
+Description = Updating initcpios...
 Depends=mkinitcpio
 When = PostTransaction
 Exec=/usr/bin/mkinitcpio -P
