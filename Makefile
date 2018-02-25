@@ -15,7 +15,7 @@ PKGS := $(foreach pkgname,$(notdir $(PKG_DIRS)),$(PKG_DIR)/$(pkgname)/$(call get
 SIGS := $(foreach pkgname,$(notdir $(PKG_DIRS)),$(PKG_DIR)/$(pkgname)/$(call get_pkg_name,$(pkgname)).$(SIG_SUFFIX))
 
 REPO_NAME=dangersalad
-REPO_DIR := $HOME/.cache/reposync
+REPO_DIR := $(HOME)/.cache/reposync
 
 space :=
 space +=
