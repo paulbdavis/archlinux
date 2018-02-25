@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-exwm
-pkgver=0.0.4
+pkgver=0.1.0
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-plasma' 'dangersalad-gnome')

@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-graphical
-pkgver=0.0.2
+pkgver=0.1.0
 pkgrel=1
 pkgdesc="Graphical environment configuration for dangersalad systems"
 arch=('any')

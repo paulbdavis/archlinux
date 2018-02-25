@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.0.9
+pkgver=0.1.0
 pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')

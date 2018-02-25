@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-dell-5520
-pkgver=0.0.3
+pkgver=0.1.0
 pkgrel=1
 provides=('dangersalad-hardware')
 conflicts=('dangersalad-wilddog')
