@@ -137,6 +137,7 @@ depends=(
     cabal-install
     calc
     ccid
+    cmake
     devtools
     dialog
     docker
@@ -162,6 +163,7 @@ depends=(
     rtorrent
     smem
     syncthing
+    tcpdump
     the_silver_searcher
     tmux
     trickle
