@@ -223,9 +223,9 @@ then
 
     ### Setup the disk and partitions ###
     parted --script "${device}" -- mklabel gpt \
-           mkpart ESP fat32 1Mib 129MiB \
+           mkpart ESP fat32 1Mib 513MiB \
            set 1 boot on \
-           mkpart primary ext4 129MiB 100%
+           mkpart primary ext4 513MiB 100%
 
     echo -n "Waiting for partitions"
     while ! ls "${device}"* >/dev/null 2>&1
