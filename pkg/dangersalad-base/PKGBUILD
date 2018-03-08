@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')
@@ -26,6 +26,7 @@ source=(
     "systemd-boot.hook"
     "efi-update.path"
     "efi-update.service"
+    "gocode-config.json"
 )
 sha256sums=('af51a02771f8fdfbb8a7ed8d9c9226b9850109022ae94d3c828a08a7ccf575c2'
             'e04d9f14714b7ff2581838ef48ab921cb7b1c49e00c4d263e7008d528c505aef'
@@ -43,7 +44,8 @@ sha256sums=('af51a02771f8fdfbb8a7ed8d9c9226b9850109022ae94d3c828a08a7ccf575c2'
             '93203f764c4da0c4ecadf80cded78d5f520f8274f165c6a48b683e35ffe0845a'
             '40dbff49f7a48c4eb84d8985f4268fbb58d44c750f839ef574175a65e2a46989'
             '99636f7af28ce79760b2cf93baf4444e5eecbaf8a4d1df1db2a2470ddecb5f3f'
-            'beb6db09bee86059df49e89a36bbe606505c52239fbef81ea5207ba9389c832f')
+            'beb6db09bee86059df49e89a36bbe606505c52239fbef81ea5207ba9389c832f'
+            '0d7dd09c1ffe60394d4dbeb8085cc3b9ae10c4301dfc38dd7fff84c5a0911fd0')
 depends=(
     # base
     bash
@@ -196,6 +198,7 @@ package () {
     
     install -Dm 0644 user-dirs.dirs "$pkgdir/etc/skel/.config/user-dirs.dirs"
     install -Dm 0644 user-dirs.locale "$pkgdir/etc/skel/.config/user-dirs.locale"
+    install -Dm 0644 gocode-config.json "$pkgdir/etc/skel/.config/gocode/config.json"
 
     mkdir -p "$pkgdir/usr/bin"
     ln -s "/usr/bin/vim" "$pkgdir/usr/bin/vi" 
