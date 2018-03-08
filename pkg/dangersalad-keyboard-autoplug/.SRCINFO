@@ -1,0 +1,19 @@
+pkgbase = dangersalad-keyboard-autoplug
+	pkgdesc = Auto disable laptop keybard when external keyboard is plugged in
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/dangersalad/arch/tree/master/pkg
+	arch = any
+	license = MIT
+	depends = dangersalad-base
+	source = enable-keyboard
+	source = disable-keyboard
+	source = toggle-keyboard
+	source = 91-keyboard-autoplug.rules
+	sha256sums = ffe1ae518364f661f65f11b9043ddfcd2812a103466fad3408e54cced249aa36
+	sha256sums = 9a9d0d2fcebdc1c467824bc9a5db3ce2ae028dbba290f89b0e9606abb7a5bdef
+	sha256sums = 2d1006cd068442a6802fcdf5f6817f089e47a2e15ac26bf8623c77c53710e4b3
+	sha256sums = 49bc50f7ae8a9d9a91399de3bd0b7fbbe688d2102738d3b13b857542b839b524
+
+pkgname = dangersalad-keyboard-autoplug
+

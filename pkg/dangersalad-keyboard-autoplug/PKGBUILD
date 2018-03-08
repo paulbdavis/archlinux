@@ -1,0 +1,28 @@
+# Maintainer: Paul Davis <paul@dangersalad.com>
+pkgname=dangersalad-keyboard-autoplug
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Auto disable laptop keybard when external keyboard is plugged in"
+arch=('any')
+url="https://github.com/dangersalad/arch/tree/master/pkg"
+license=('MIT')
+source=(
+    "enable-keyboard"
+    "disable-keyboard"
+    "toggle-keyboard"
+    "91-keyboard-autoplug.rules"
+)
+sha256sums=('ffe1ae518364f661f65f11b9043ddfcd2812a103466fad3408e54cced249aa36'
+            '9a9d0d2fcebdc1c467824bc9a5db3ce2ae028dbba290f89b0e9606abb7a5bdef'
+            '2d1006cd068442a6802fcdf5f6817f089e47a2e15ac26bf8623c77c53710e4b3'
+            '49bc50f7ae8a9d9a91399de3bd0b7fbbe688d2102738d3b13b857542b839b524')
+depends=(
+    dangersalad-base
+)
+
+package () {
+    install -Dm 0644 91-keyboard-autoplug.rules "$pkgdir/etc/udev/rules.d/91-keyboard-autoplug.rules"
+    install -Dm 0755 enable-keyboard "$pkgdir/usr/bin/enable-keyboard"
+    install -Dm 0755 disable-keyboard "$pkgdir/usr/bin/disable-keyboard"
+    install -Dm 0755 toggle-keyboard "$pkgdir/usr/bin/toggle-keyboard"
+}

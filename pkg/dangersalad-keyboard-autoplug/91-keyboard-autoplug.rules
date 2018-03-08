@@ -1,0 +1,2 @@
+ACTION=="add",    ENV{XAUTHORITY}="/home/paul/.Xauthority", ENV{NAME}=="*?", ENV{DISPLAY}=":0.0", ENV{ID_INPUT_KEYBOARD}=="1", RUN+="/usr/bin/disable-keyboard", TEST=="power/control", ATTR{power/control}="on"
+ACTION=="remove", ENV{XAUTHORITY}="/home/paul/.Xauthority", ENV{NAME}=="*?", ENV{DISPLAY}=":0.0", ENV{ID_INPUT_KEYBOARD}=="1", RUN+="/usr/bin/enable-keyboard"
