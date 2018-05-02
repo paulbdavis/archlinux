@@ -1,5 +1,7 @@
 #+TITLE: Danger Salad Linux (Arch)
 
+Based on https://disconnected.systems/blog/archlinux-repo-in-aws-bucket/
+
 * Install
 
   #+BEGIN_SRC sh
