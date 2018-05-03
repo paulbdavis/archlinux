@@ -198,6 +198,7 @@ clear
 echo "Starting install"
 
 vg_name="vg0"
+fstab=/mnt/etc/fstab
 
 ### Set up logging ###
 exec 1> >(tee "stdout.log")
@@ -265,8 +266,6 @@ then
     # make swap and temp
     lvcreate -y -L 8GiB -n swap "${vg_name}"
     lvcreate -y -L 2GiB -n tmp "${vg_name}"
-
-    fstab=/mnt/etc/fstab
 
     if should_encrypt
     then
