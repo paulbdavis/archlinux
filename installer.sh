@@ -311,9 +311,12 @@ then
         swapon "/dev/${vg_name}/swap"
         for k in "${!lv_mounts[@]}"
         do
-            mkfs.ext4 "/dev/${vg_name}/$k"
-            mkdir -p "/mnt${lv_mounts[$k]}"
-            mount "/dev/${vg_name}/$k" "/mnt${lv_mounts[$k]}"
+            if [[ "$k" != "root" ]]
+            then
+                mkfs.ext4 "/dev/${vg_name}/$k"
+                mkdir -p "/mnt${lv_mounts[$k]}"
+                mount "/dev/${vg_name}/$k" "/mnt${lv_mounts[$k]}"
+            fi
         done
     fi
 
