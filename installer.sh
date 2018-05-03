@@ -307,6 +307,7 @@ then
         mount "/dev/${vg_name}/root" /mnt
         mkdir -p /mnt/etc
         
+        mkswap "/dev/${vg_name}/swap"
         swapon "/dev/${vg_name}/swap"
         for k in "${!lv_mounts[@]}"
         do
