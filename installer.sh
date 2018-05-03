@@ -84,7 +84,7 @@ function get_details () {
     fi
     printf "luks_password=%q\n" "$luks_password" >> "$install_details_file"
 
-    pkgsel="$(dialog --stdout --no-tags --menu "Package Selection" 0 0 2 "exwm" "EXWM" "plasma" "KDE Plasma" "none" "No GUI")"
+    pkgsel="$(dialog --stdout --no-tags --menu "Package Selection" 0 0 3 "exwm" "EXWM" "plasma" "KDE Plasma" "none" "No GUI")"
     clear
 
     pacstrap_pkgs=()
@@ -124,7 +124,7 @@ function get_details () {
         fi
     fi
 
-    hardware_pkg="$(dialog --stdout --no-tags --menu "Harware package" 0 0 2 "none" "None" "dell-5520" "Dell 5520" "dell-xps13" "Dell XPS 13 (9343)")"
+    hardware_pkg="$(dialog --stdout --no-tags --menu "Harware package" 0 0 3 "none" "None" "dell-5520" "Dell 5520" "dell-xps13" "Dell XPS 13 (9343)")"
     clear
     printf "hardware_pkg=%s\n" "${hardware_pkg}" >> "$install_details_file"
 
@@ -247,8 +247,8 @@ then
 
     # Simple globbing was not enough as on one device I needed to match /dev/mmcblk0p1 
     # but not /dev/mmcblk0boot1 while being able to match /dev/sda1 on other devices.
-    part_boot="$(ls ${device}?1)"
-    part_lvm="$(ls ${device}?2)"
+    part_boot="$(ls ${device}*1)"
+    part_lvm="$(ls ${device}*2)"
 
     wipefs "${part_boot}"
     wipefs "${part_lvm}"
