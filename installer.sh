@@ -84,7 +84,7 @@ function get_details () {
     fi
     printf "luks_password=%q\n" "$luks_password" >> "$install_details_file"
 
-    pkgsel="$(dialog --stdout --no-tags --menu "Package Selection" 0 0 2 "exwm" "EXWM" "none" "No GUI")"
+    pkgsel="$(dialog --stdout --no-tags --menu "Package Selection" 0 0 2 "exwm" "EXWM" "plasma" "KDE Plasma" "none" "No GUI")"
     clear
 
     pacstrap_pkgs=()
@@ -104,6 +104,13 @@ function get_details () {
         then
             pacstrap_pkgs=(dangersalad-crypt dangersalad-exwm dangersalad-apps-base)
         fi
+    elif [[ "$pkgsel" == "plasma" ]]
+    then
+        pacstrap_pkgs=(dangersalad-plasma dangersalad-apps-base)
+        if should_encrypt
+        then
+            pacstrap_pkgs=(dangersalad-crypt dangersalad-plasma dangersalad-apps-base)
+        fi
     fi   
 
     if [[ "$pkgsel" != "none" ]]
@@ -117,13 +124,16 @@ function get_details () {
         fi
     fi
 
-    hardware_pkg="$(dialog --stdout --no-tags --menu "Harware package" 0 0 2 "none" "None" "dell-5520" "Dell 5520")"
+    hardware_pkg="$(dialog --stdout --no-tags --menu "Harware package" 0 0 2 "none" "None" "dell-5520" "Dell 5520" "dell-xps13" "Dell XPS 13 (9343)")"
     clear
     printf "hardware_pkg=%s\n" "${hardware_pkg}" >> "$install_details_file"
 
     if [[ "$hardware_pkg" == "dell-5520" ]]
     then
         pacstrap_pkgs=(${pacstrap_pkgs[@]} dangersalad-dell-5520)
+    elif [[ "$hardware_pkg" == "dell-xps13" ]]
+    then
+        pacstrap_pkgs=(${pacstrap_pkgs[@]} dangersalad-dell-xps13)
     fi
     
     printf "pacstrap_pkgs=%s\n" "(${pacstrap_pkgs[*]})" >> "$install_details_file"
