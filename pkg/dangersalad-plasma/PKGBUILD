@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-plasma
-pkgver=0.1.2
+pkgver=0.1.3
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-exwm' 'dangersalad-gnome')
@@ -33,6 +33,7 @@ depends=(
     breeze
     breeze-gtk
     discover
+    dolphin
     drkonqi
     kactivitymanagerd
     kde-cli-tools
@@ -44,6 +45,7 @@ depends=(
     kinfocenter
     kmenuedit
     knetattach
+    konsole
     kscreen
     kscreenlocker
     ksshaskpass
