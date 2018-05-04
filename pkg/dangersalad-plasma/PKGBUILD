@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-plasma
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-exwm' 'dangersalad-gnome')
@@ -15,7 +15,7 @@ source=(
     default.pa
     gpg-agent.conf 
 )
-sha256sums=('330c9cd82a65c0158779d7fa6dc4da5d4d88d0172e2c653029ee706ad113fb0a'
+sha256sums=('8a3dbed67f44f819b91c3a80db62e2ba0566e7868191f4e427a86f597bbe46da'
             '45f31e9d13e87def9317e9e12c57c61f582d0c92a3391551842343eb7224be49'
             '89af270caed8c2e758a4fe3e41929aa4be9cc010114615ac77622ab9a2f2145c')
 

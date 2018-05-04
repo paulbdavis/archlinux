@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-dell-xps13
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 provides=('dangersalad-hardware')
 conflicts=('dangersalad-wilddog' 'dangersalad-dell-5520')
