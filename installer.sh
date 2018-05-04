@@ -143,7 +143,6 @@ source "$install_details_file"
 # check that we have all the details
 : ${hostname:?"hostname cannot be empty"}
 : ${user:?"user cannot be empty"}
-: ${password:?"password cannot be empty"}
 : ${device:?"device cannot be empty"}
 : ${lv_sizes[*]:?"lv_sizes cannot be empty"}
 : ${lv_mounts[*]:?"lv_mounts cannot be empty"}
@@ -153,7 +152,7 @@ if should_encrypt
 then
     : ${luks_password:?"luks_password cannot be empty"}
 fi
-: ${pacstrap_pkgs[*]:?"lv_mounts cannot be empty"}
+: ${pacstrap_pkgs[*]:?"pacstrap_pkgs cannot be empty"}
 
 setup_message_format="%20s: %s\n"
 function setup_message () {
