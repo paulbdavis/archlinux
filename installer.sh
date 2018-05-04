@@ -39,14 +39,6 @@ function get_details () {
     user=${user:="paul"}
     printf "user=%q\n" "$user" >> "$install_details_file"
 
-    password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
-    clear
-    : ${password:?"password cannot be empty"}
-    password2=$(dialog --stdout --passwordbox "Enter admin password again" 0 0) || exit 1
-    clear
-    [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
-    printf "password=%q\n" "$password" >> "$install_details_file"
-
     devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
     device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
     clear
@@ -455,7 +447,9 @@ then
     arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G sudo,uucp,video,audio,storage,games,input,docker "$user"  || echo "User $user exits"
     arch-chroot /mnt chsh -s /usr/bin/zsh
 
-    echo "$user:$password" | chpasswd --root /mnt
-    echo "root:$password" | chpasswd --root /mnt
+    echo "Set password for $user"
+    arch-chroot /mnt passwd "$user"
+    echo "Set password for $user"
+    arch-chroot /mnt passwd "root"
     echo "dsinstall_step_4_users=y" >> "$install_details_file"
 fi
