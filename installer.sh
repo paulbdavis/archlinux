@@ -428,19 +428,23 @@ title    Danger Salad Linux (Arch)
 linux    /arch/vmlinuz-linux
 initrd   /arch/intel-ucode.img
 initrd   /arch/initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") nvidia_drm.modeset=1 rw
+options  root=PARTUUID=$(blkid -s PARTUUID -o value "/dev/${vg_name}/root") nvidia_drm.modeset=1 rw
 EOF
         else
             cat <<EOF > /mnt/boot/efi/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
 linux    /arch/vmlinuz-linux
 initrd   /arch/initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
+options  root=PARTUUID=$(blkid -s PARTUUID -o value "/dev/${vg_name}/root") rw
 EOF
         fi
     fi
 
-    arch-chroot /mnt systemctl start efi-update.service
+    mkdir -p /mnt/boot/efi/arch
+    cp -af /mnt/boot/vmlinuz-linux /mnt/boot/efi/arch/
+    cp -af /mnt/boot/initramfs-linux.img /mnt/boot/efi/arch/
+    cp -af /mnt/boot/initramfs-linux-fallback.img /mnt/boot/efi/arch/
+    cp -af /mnt/boot/intel-ucode.img /mnt/boot/efi/arch/
     
     echo "dsinstall_step_3_bootloader=y" >> "$install_details_file"
 fi
