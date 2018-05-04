@@ -451,8 +451,8 @@ fi
 
 if [[ -z "$dsinstall_step_4_users" ]]
 then
-    arch-chroot /mnt groupadd sudo
-    arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G sudo,uucp,video,audio,storage,games,input,docker "$user"
+    arch-chroot /mnt groupadd sudo || echo "Group sudo exits"
+    arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G sudo,uucp,video,audio,storage,games,input,docker "$user"  || echo "User $user exits"
     arch-chroot /mnt chsh -s /usr/bin/zsh
 
     echo "$user:$password" | chpasswd --root /mnt
