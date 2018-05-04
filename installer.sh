@@ -420,14 +420,14 @@ title    Danger Salad Linux (Arch)
 linux    /arch/vmlinuz-linux
 initrd   /arch/intel-ucode.img
 initrd   /arch/initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "/dev/${vg_name}/root") nvidia_drm.modeset=1 rw
+options  root=/dev/${vg_name}/root nvidia_drm.modeset=1 rw
 EOF
         else
             cat <<EOF > /mnt/boot/efi/loader/entries/arch.conf
 title    Danger Salad Linux (Arch)
 linux    /arch/vmlinuz-linux
 initrd   /arch/initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "/dev/${vg_name}/root") rw
+options  root=/dev/${vg_name}/root rw
 EOF
         fi
     fi
