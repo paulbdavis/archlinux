@@ -375,10 +375,13 @@ EOF
     arch-chroot /mnt pacman-key --refresh-keys
     arch-chroot /mnt pacman-key --lsign-key "$gpg_key_id"
 
-    for netconf in /etc/netctl/*
-    do
-        [[ -f "$netconf" ]] && cp "$netconf" "/mnt$netconf"
-    done
+    if [[ -d "/mnt/etc/netctl" ]]
+    then
+        for netconf in /etc/netctl/*
+        do
+            [[ -f "$netconf" ]] && cp "$netconf" "/mnt$netconf"
+        done
+    fi
 
     echo "dsinstall_step_2_install_setup=y" >> "$install_details_file"
 fi
