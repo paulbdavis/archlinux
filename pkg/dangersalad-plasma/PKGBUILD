@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-plasma
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-exwm' 'dangersalad-gnome')
@@ -15,7 +15,7 @@ source=(
     default.pa
     gpg-agent.conf 
 )
-sha256sums=('51fa690c71f4ec830b2af3ea1700ae95a916a63012a8bea9091b5eb3d1c283eb'
+sha256sums=('330c9cd82a65c0158779d7fa6dc4da5d4d88d0172e2c653029ee706ad113fb0a'
             '45f31e9d13e87def9317e9e12c57c61f582d0c92a3391551842343eb7224be49'
             '89af270caed8c2e758a4fe3e41929aa4be9cc010114615ac77622ab9a2f2145c')
 
@@ -25,13 +25,13 @@ depends=(
     dangersalad-graphical
 
     acpi
-    blueman
     bluez
     bluez-utils
     pulseaudio-bluetooth
 
     plasma-meta
     sddm
+    sddm-kcm
 )
 
 package () {
