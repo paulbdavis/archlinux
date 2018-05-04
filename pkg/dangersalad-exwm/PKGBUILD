@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-exwm
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-plasma' 'dangersalad-gnome')
@@ -40,6 +40,7 @@ depends=(
     bluez-utils
     lxappearance
     feh
+    netctl
     numlockx
     pavucontrol
     pulseaudio
@@ -47,8 +48,9 @@ depends=(
     pulseaudio-ctl
     slock
     termite
-    yabar-git
+    wpa_actiond
     xcursor-simpleandsoft
+    yabar-git
 )
 
 package () {

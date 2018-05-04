@@ -20,7 +20,6 @@ depends=(
     efibootmgr
     intel-ucode
     iw
-    wpa_actiond
     wpa_supplicant
 
     # some apps for this machine

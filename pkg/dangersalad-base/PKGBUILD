@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-base
-pkgver=0.1.2
+pkgver=0.1.3
 pkgrel=1
 pkgdesc="Base system configuration for dangersalad systems"
 arch=('any')
@@ -79,7 +79,6 @@ depends=(
     man-pages
     mdadm
     nano
-    netctl
     pacman
     pciutils
     pcmciautils

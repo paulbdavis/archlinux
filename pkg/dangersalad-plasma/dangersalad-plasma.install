@@ -5,6 +5,7 @@ post_upgrade () {
 
 post_install () {
     systemctl enable --now bluetooth.service
-    systemctl enable --now sddm
+    systemctl enable --now NetworkManager.service
+    systemctl enable --now sddm.service
     post_upgrade
 }
