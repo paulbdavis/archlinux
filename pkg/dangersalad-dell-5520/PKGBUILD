@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-dell-5520
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 provides=('dangersalad-hardware')
 conflicts=('dangersalad-wilddog' 'dangersalad-dell-xps13')
@@ -13,11 +13,14 @@ source=(
     nvidia.hook
     nvidia.conf
     xinitrc.local
+    91-tb16-fixes.rules
 )
 sha256sums=('d5dc85061a225f39d0f3823888f0747ee9be92d8e93c842df44884e2d09ad74f'
             '0d08a52320395d026de8eaed7aeabea05dd4528a05dba755d4d0ecf965ae7cab'
             '73dfd091c573d5b46b883403eaa35929d85e7b4ff3434b984a5e8169ef17352c'
-            'ce16848be9a20da534a3c38405b863d1d2ce2671f3f242b2131a2adfc5e15876')
+            'ce16848be9a20da534a3c38405b863d1d2ce2671f3f242b2131a2adfc5e15876'
+            'f99a2c58235d3c53c92258262b8f0d92922a14e2b81d94372507449f6756d15d')
+
 depends=(
 
     # base meta package
@@ -44,4 +47,5 @@ package () {
      install -Dm 0644 nvidia.conf "$pkgdir/etc/X11/xorg.conf.d/00-nvidia.conf"
      install -Dm 0644 nvidia.hook "$pkgdir/usr/share/libalpm/hooks/nvidia.hook"
      install -Dm 0644 xinitrc.local "$pkgdir/etc/skel/.xinitrc.local"
+     install -Dm 0644 91-tb16-fixes.rules "$pkgdir/etc/udev/rules.d/91-tb16-fixes.rules"
 }

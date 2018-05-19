@@ -9,16 +9,23 @@ post_upgrade () {
     cp /etc/pacman.conf /etc/pacman.conf.original
     cp /etc/pacman.conf.ds /etc/pacman.conf
     
-    cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.original
-    cp /etc/mkinitcpio.conf.ds /etc/mkinitcpio.conf
+    # if there is an crypt mkinitcpio.conf, ignore the update
+    if [ ! -f /etc/mkinitcpio.conf.encrypted ]
+    then
+        cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.original
+        cp /etc/mkinitcpio.conf.ds /etc/mkinitcpio.conf
+    fi
+    
+    cp -r /usr/lib/fwupdate/EFI /boot/efi
 }
 
 post_install () {
-    systemctl enable --now docker.service
-    systemctl enable --now reflector.timer
-    systemctl enable --now dhcpcd.service
-    systemctl enable --now pcscd.service
-    systemctl enable --now efi-update.path
+    systemctl enable docker.service
+    systemctl enable reflector.timer
+    systemctl enable dhcpcd.service
+    systemctl enable pcscd.service
+    systemctl enable efi-update.path
+    mkdir -p /boot/efi/arch
     post_upgrade
 }
 

@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-plasma
-pkgver=0.1.3
+pkgver=0.1.5
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-exwm' 'dangersalad-gnome')
@@ -12,12 +12,9 @@ install="dangersalad-plasma.install"
 makedepends=(git)
 source=(
     dangersalad-plasma.install
-    default.pa
-    gpg-agent.conf 
 )
-sha256sums=('8a3dbed67f44f819b91c3a80db62e2ba0566e7868191f4e427a86f597bbe46da'
-            '45f31e9d13e87def9317e9e12c57c61f582d0c92a3391551842343eb7224be49'
-            '89af270caed8c2e758a4fe3e41929aa4be9cc010114615ac77622ab9a2f2145c')
+
+sha256sums=('a6b720f513697bc893400e8ee067b80f28c1ecdd73017c779c0c565b2fc1d2a9')
 
 depends=(
 
@@ -36,10 +33,14 @@ depends=(
     dolphin
     drkonqi
     kactivitymanagerd
+    kate
     kde-cli-tools
     kde-gtk-config
     kdecoration
     kdeplasma-addons
+    kdialog
+    keditbookmarks
+    kfind
     kgamma5
     khotkeys
     kinfocenter
@@ -79,13 +80,5 @@ package () {
     
     install -Dm 0644 gpg-agent.conf "$pkgdir/etc/skel/.gnupg/gpg-agent.conf"
     chmod 700 "$pkgdir/etc/skel/.gnupg"
-    
-    install -Dm 0644 default.pa "$pkgdir/etc/pulse/default.pa.ds"
-
-    # install exwm branch of emacs config
-    git clone --recursive --branch exwm https://github.com/dangersalad/emacs-config "$pkgdir/etc/skel/.emacs.d"
-
-    mkdir -p "$pkgdir/etc/skel/org/agenda"
-    mkdir -p "$pkgdir/etc/skel/sync"
     
 }

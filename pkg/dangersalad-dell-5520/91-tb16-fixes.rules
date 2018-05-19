@@ -1,0 +1,2 @@
+ACTION=="add", ATTR{busnum}=="3", TEST=="power/control", ATTR{power/control}="on"
+ACTION=="add", ATTR{busnum}=="4", TEST=="power/control", ATTR{power/control}="on"
