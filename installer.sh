@@ -19,8 +19,8 @@ declare -A lv_defaults=()
 
 lv_defaults[root]=32
 lv_defaults[home]=64
-lv_defaults[var]=8
-lv_defaults[docker]=16
+lv_defaults[var]=16
+lv_defaults[docker]=32
 lv_defaults[opt]=8
 
 function should_encrypt () {
