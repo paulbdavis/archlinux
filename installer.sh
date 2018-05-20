@@ -6,7 +6,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 rm -f /etc/localtime
 ln -s /usr/share/zoneinfo/America/Denver /etc/localtime
 
-REPO_URL="https://nyc3.digitaloceanspaces.com/dangersalad-archlinux/repo/x86_64"
+REPO_URL="https://dangersalad-archlinux.s3-us-west-1.amazonaws.com/repo/x86_64"
 
 gpg_key_id="21A8557B914A7EA06E99B6AF05041AFE9A54C5FB"
 gpg_trusted="/usr/share/pacman/keyrings/archlinux-trusted"
