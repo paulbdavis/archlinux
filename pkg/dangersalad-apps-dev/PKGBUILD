@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-apps-dev
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="Dev applications for dangersalad systems"
 arch=('any')
@@ -11,14 +11,18 @@ depends=(
     dangersalad-desktop
     
     aws-cli
+    arduino-avr-core
     clang
     dbeaver
+    ditaa
     eslint
     ghc
     go
     dep
     google-cloud-sdk
     jshon
+    kops-bin
+    wget
     kubectl-bin
     kubernetes-helm
     kubetail

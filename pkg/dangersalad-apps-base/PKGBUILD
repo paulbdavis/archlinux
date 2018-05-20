@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-apps-base
-pkgver=0.1.0
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="Base applications for dangersalad desktops"
 arch=('any')
