@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-apps-dev
-pkgver=0.1.2
+pkgver=0.1.3
 pkgrel=1
 pkgdesc="Dev applications for dangersalad systems"
 arch=('any')
@@ -28,6 +28,7 @@ depends=(
     kubetail
     mattermost-desktop
     nvm
+    postgresql
     rustup
     slack-desktop
     yarn

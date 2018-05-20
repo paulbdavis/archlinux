@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-apps-base
-pkgver=0.1.2
+pkgver=0.1.3
 pkgrel=1
 pkgdesc="Base applications for dangersalad desktops"
 arch=('any')
@@ -31,6 +31,7 @@ depends=(
     stone-soup
     syncthing-gtk
     telegram-desktop
+    texlive-latexextra
     vlc
     zathura
     zathura-pdf-mupdf
