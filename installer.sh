@@ -451,8 +451,8 @@ then
 
     arch-chroot /mnt timedatectl set-ntp true
     echo "Set password for $user"
-    arch-chroot /mnt passwd "$user"
+    echo "$password" | arch-chroot /mnt passwd "$user" --stdin
     echo "Set password for $user"
-    arch-chroot /mnt passwd "root"
+    echo "$password" | arch-chroot /mnt passwd "root" --stdin
     echo "dsinstall_step_4_users=y" >> "$install_details_file"
 fi
