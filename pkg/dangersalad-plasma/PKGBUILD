@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-plasma
-pkgver=0.1.5
+pkgver=0.1.6
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-exwm' 'dangersalad-gnome')
@@ -11,10 +11,12 @@ license=('MIT')
 install="dangersalad-plasma.install"
 makedepends=(git)
 source=(
+    gpg-agent.conf
     dangersalad-plasma.install
 )
 
-sha256sums=('a6b720f513697bc893400e8ee067b80f28c1ecdd73017c779c0c565b2fc1d2a9')
+sha256sums=('5dc613d9d6a30ed4d60f89081b8c8d31e4793901859f4e17679c1043a79d38fe'
+            'eb45b117ca32949b80ccdb65fa04ff1c989daae25008ad07c87dae7b9ad9e90f')
 
 depends=(
 
@@ -62,18 +64,20 @@ depends=(
     oxygen
     plasma-desktop
     plasma-integration
-    plasma-nm
     plasma-pa
     plasma-sdk
     plasma-vault
     plasma-workspace
     plasma-workspace-wallpapers
     polkit-kde-agent
-    powerdevil
     sddm-kcm
     systemsettings
     user-manager
     xdg-desktop-portal-kde
+    netctl
+    wpa_actiond
+    cups
+    brother-mfc-j4620dw
 )
 
 package () {

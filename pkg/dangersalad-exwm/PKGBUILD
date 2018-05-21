@@ -1,6 +1,6 @@
 # Maintainer: Paul Davis <paul@dangersalad.com>
 pkgname=dangersalad-exwm
-pkgver=0.2.0
+pkgver=0.2.1
 pkgrel=1
 provides=('dangersalad-desktop')
 conflicts=('dangersalad-i3' 'dangersalad-plasma' 'dangersalad-gnome')
@@ -52,6 +52,8 @@ depends=(
     wpa_actiond
     xcursor-simpleandsoft
     yabar-git
+    cups
+    brother-mfc-j4620dw
 )
 
 package () {
