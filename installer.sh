@@ -449,6 +449,7 @@ then
     arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G sudo,uucp,video,audio,storage,games,input,docker "$user"  || echo "User $user exits"
     arch-chroot /mnt chsh -s /usr/bin/zsh
 
+    arch-chroot /mnt timedatectl set-ntp true
     echo "Set password for $user"
     arch-chroot /mnt passwd "$user"
     echo "Set password for $user"
